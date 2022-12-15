@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
 
 
+
+
 const SingleProduct = () => {
 
     const [singleProduct, setSingleProduct] = useState({})
@@ -21,7 +23,8 @@ const SingleProduct = () => {
 
     }, [params._id]);
 
-
+    
+  
     
 
   return (

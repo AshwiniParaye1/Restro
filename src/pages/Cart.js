@@ -42,7 +42,7 @@ const Cart = () => {
 
     })
 
-  }, [cart]);
+  }, [cart, priceFetched]);
 
   const getQty = (productId) => {
 
