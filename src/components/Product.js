@@ -1,9 +1,11 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../pages/CartContext';
 
 
 const Product = (props) => {
+
+  const [isAdding, setIsAdding] = useState(false);
 
   const {cart, setCart} = useContext(CartContext)
   
@@ -42,19 +44,16 @@ const Product = (props) => {
     console.log(_cart)
     setCart(_cart);
 
-    // const cart = {
-    //     items: {
+    setIsAdding(true);
+    setTimeout (() => {
 
-    //       '60c67bdff5ee510015f3dda8': 2,
-    //       '60c67b95f5ee510015f3dda5': 3
-
-    //     },
-
-    //     totalItems: 5
-
-    // }
+        setIsAdding(false);
+    }, 500);   //after 1/2 sec isAdding will be false
   
   }
+
+  
+
 
   return (
     <Link to={`/products/${product._id}`}>
@@ -66,12 +65,11 @@ const Product = (props) => {
             </div>
             <div className='flex justify-between items-center mt-4'>
                 <span>₹ {product.price}</span>
-                <button onClick={ (e) => { addToCart(e, product) } }
-                className=' bg-orange-500 text-white py-1 px-4 rounded-full font-bold hover:bg-orange-700'>Add</button>
+                <button disabled={isAdding}  onClick={ (e) => { addToCart(e, product) } }
+                className={`${isAdding ? 'bg-green-500' : 'bg-orange-500' } text-white py-1 px-4 rounded-full font-bold `}>Add{isAdding ? 'ed' : ''}</button>
             </div>
 
-           
-    
+          
     </div>
     </Link>
   )

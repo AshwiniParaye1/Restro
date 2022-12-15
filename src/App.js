@@ -20,7 +20,7 @@ function App() {
   useEffect (() => {
 
     const cart = window.localStorage.getItem('cart');
-    
+    setCart(JSON.parse(cart));
 
   }, []);
 
@@ -30,7 +30,7 @@ function App() {
 
   }, [cart]);
 
-  console.log(setCart)
+  // console.log(setCart)
 
   return (
     <div>
