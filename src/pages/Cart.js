@@ -10,11 +10,17 @@ const Cart = () => {
   const { cart, setCart } = useContext( CartContext )
   console.log(cart)
 
+  const [ priceFetched, togglePriceFetched ] = useState(false);
+
   useEffect(() => {
 
     if (!cart.items) {
       return;
     }
+    if(priceFetched){
+        return;
+    }
+
     console.log('cart', Object.keys(cart.items));
     fetch('https://star-spark-pasta.glitch.me/api/products/cart-items', {
 
@@ -32,6 +38,7 @@ const Cart = () => {
     .then(products => {
 
       setProducts(products);
+      togglePriceFetched(true);
 
     })
 
@@ -78,6 +85,27 @@ const getSum = (productId, price) => {
 }
 
 
+  const handleDelete = (productId) => {
+
+    const _cart = {...cart};    //cloning the cart using spread operator(...)
+    const qty = _cart.items[productId];
+    delete _cart.items[productId];
+    _cart.totalItems -= qty;
+    setCart(_cart);
+    const updatedProductsList = products.filter( (product) => product._id !== productId );
+    setProducts(updatedProductsList);
+
+  }
+
+  const handlePlaceOrder = () => {
+
+    window.alert('Your Order Has Been Placed Successfully!');
+    setProducts([]);
+    setCart({});
+
+
+  }
+
   return (
 
     products.length ?
@@ -91,7 +119,7 @@ const getSum = (productId, price) => {
 
             products.map(product => {
               return (
-                <li className='mb-12'>
+                <li className='mb-12' key={product._id}>
                     <div className='flex items-center justify-between'>
 
                         <div className='flex items-center'>
@@ -107,7 +135,7 @@ const getSum = (productId, price) => {
 
                         <span>₹ { getSum(product._id, product.price) }</span>
 
-                        <button className='bg-red-600 px-4 py-2 rounded-full leading-none text-white font-bold'>Delete</button>
+                        <button onClick={ () => { handleDelete(product._id) } } className='bg-red-600 px-4 py-2 rounded-full leading-none text-white font-bold'>Delete</button>
 
                     </div>
                 </li>
@@ -129,7 +157,7 @@ const getSum = (productId, price) => {
 
           <div className='text-right mt-6'>
 
-              <button className='bg-orange-500 px-4 py-2 rounded-full leading none text-white font-bold'>Place Order</button>
+              <button onClick={handlePlaceOrder} className='bg-orange-500 px-4 py-2 rounded-full leading none text-white font-bold'>Place Order</button>
 
           </div>
 
