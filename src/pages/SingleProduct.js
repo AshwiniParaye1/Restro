@@ -3,12 +3,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 
 
-
-const SingleProduct = () => {
+const SingleProduct = (props) => {
 
     const [singleProduct, setSingleProduct] = useState({})
     const params = useParams();
     // console.log(params)
+
 
     const navigate = useNavigate();
 
@@ -36,7 +36,9 @@ const SingleProduct = () => {
          <h1 className='text-xl font-bold'>{singleProduct.name}</h1> 
          <div className='text-md'>{singleProduct.size}</div>
          <div className='font-bold mt-2'>₹ {singleProduct.price}</div>
-         <button className='bg-orange-500 py-1 px-8 rounded-full font-bold mt-4 text-white hover:bg-orange-700'>Add to cart</button>
+         <button  className='bg-orange-500 py-1 px-8 rounded-full font-bold mt-4 text-white hover:bg-orange-700'>Add to cart</button>
+
+         
         </div>
 
       </div>

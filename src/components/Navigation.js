@@ -20,12 +20,12 @@ const Navigation = () => {
       <nav className='container mx-auto flex items-center justify-between py-4'>
         
           <Link to='/'>
-            <img style={{height: 45}} src="/images/logo.png" alt="logo" />
+            <img style={{height: 60}} src="/images/logo.png" alt="logo" />
           </Link>
 
           <ul className='flex items-center'>
-            <li ><Link to="/">Home</Link></li>
-            <li className='ml-5'><Link to="/Products">Products</Link></li>
+            <li ><Link to="/"><b>Home</b></Link></li>
+            <li className='ml-5'><Link to="/Products"><b>Products</b></Link></li>
             <li className='ml-5'>
               <Link to="/cart">
                 <div style={cartStyle}>
